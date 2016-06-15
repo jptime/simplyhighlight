@@ -28,7 +28,7 @@
         "http://*/*", "https://*/*"
       ],
       "js": [
-        "js/jquery/jquery.min.js","js/jquery.mark.min.js","src/inject/inject.js"
+        "js/jquery/jquery.min.js", "./src/inject/inject.js"
       ],
       "run_at": "document_end"
     }

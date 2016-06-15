@@ -1,35 +1,25 @@
-chrome.extension.sendMessage({}, function(response) {
-    var readyStateCheckInterval = setInterval(function() {
-        if (document.readyState === "complete") {
-            clearInterval(readyStateCheckInterval);
-
-
-
-
-            var query = /simply/gi
-
-            var replaceHtml = $("body").html().replace(query, '<span style="background-color:yellow"> simply </span>');
-
-            console.log(query.test(replaceHtml))
-
-            if (query.test(replaceHtml)) {
-
-                var opt = {
-                    TemplateType: "basic",
-                    title: "Testing!",
-                    message: "mayybe this works?",
-                    iconUrl: "icons/icon48.png"
+            var foundIt = false
+                jQuery.fn.highlight = function (str, className) {
+                    var regex = new RegExp(str, "gi");
+                    return this.each(function () {
+                        $(this).contents().filter(function() {
+                            return this.nodeType == 3 && regex.test(this.nodeValue);
+                        }).replaceWith(function() {
+                            return (this.nodeValue || "").replace(regex, function(match) {
+                                foundIt = true
+                                return "<span style='background-color:yellow'>" + match + "</span>";
+                            });
+                        });
+                    });
                 };
+            
+            $("*").highlight("simply", "highlight")
+
+            if (foundIt) {
+
                 chrome.runtime.sendMessage({
-                    type: "shownotification",
-                    opt: opt
+                    type: "shownotification"
                 }, function() {});
 
             }
 
-
-            $("body").html(replaceHtml)
-
-        }
-    }, 10);
-});
