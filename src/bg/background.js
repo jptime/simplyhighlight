@@ -7,13 +7,13 @@
 
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
+    function(request, sender, sendResponse) {
 
-  	if(request.type === "shownotification"){
-        chrome.notifications.create('notify', request.opt, function(){})
-    }
-  	chrome.pageAction.show(sender.tab.id);
-    sendResponse();
+        if (request.type === "shownotification") {
+            chrome.notifications.create('notify', request.opt, function() {})
+        }
+        chrome.pageAction.show(sender.tab.id);
+        sendResponse();
 
 
-  });
+    });
